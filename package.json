@@ -1,0 +1,19 @@
+{
+  "name": "github-trending-language",
+  "version": "1.0.0",
+  "description": "Web app to get trending languages on github.",
+  "main": "./src/server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/server/index.js",
+    "live": "nodemon ./src/server/index.js"
+  },
+  "author": "Samy Nassar",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
