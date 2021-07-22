@@ -7,14 +7,21 @@ class App extends React.Component {
     this.state = {
     };
   }
-
+  
   componentDidMount(){
     fetch('/trending-languages')
-        .then(response => response.json())
-        .then(data => {
-          console.log(data)
-          this.setState({data})
-        })
+    .then(response => response.json())
+    .then(data => {
+      const sortedData = this.getSortedLanguages(data)
+      this.setState({data: sortedData})
+    })
+  }
+  
+  // Sort the language objects by the num of repos (Descending).
+  getSortedLanguages = (languages) => {
+    return Object.fromEntries(
+      Object.entries(languages).sort((a, b) => b[1].length - a[1].length)
+    );
   }
 
   // Create unorder list for Repos url.
@@ -25,7 +32,6 @@ class App extends React.Component {
         <a href={url} target="_blank">{url}</a>
       </li>
     )
-    console.log(repoUrlList)
     return(
       <ul>
         {repoUrlList}
@@ -64,9 +70,9 @@ class App extends React.Component {
 
     if(!this.state.data){
       return (
-        <div class="d-flex justify-content-center text-primary m-2">
-          <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
+        <div className="d-flex justify-content-center text-primary m-2">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
           </div>
         </div>
       )
